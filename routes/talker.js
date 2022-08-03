@@ -9,8 +9,11 @@ const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
 const editUser = require('../helper/editUser');
 const deleteUsers = require('../helper/deleteUsers');
+const searchUsers = require('../helper/searchUsers');
 
 const talker = express.Router();
+
+talker.get('/search', validateToken, searchUsers);
 
 talker.get('/', async (_req, res) => {
   try {
