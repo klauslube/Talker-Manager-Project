@@ -38,24 +38,17 @@ talker.get('/:id', async (req, res) => {
   }
 });
 
-talker.post('/',
-validateToken,
-validateTalk, 
-validateRate,
-validateWatchedAt, 
-validateAge, 
-validateName,
-writeNewUser);
-
-talker.put('/:id', 
-validateToken,
-validateTalk,
-validateRate,
-validateWatchedAt,
-validateAge,
-validateName,
-editUser);
-
 talker.delete('/:id', validateToken, deleteUsers);
+
+talker.use(validateToken,
+  validateTalk, 
+  validateRate,
+  validateWatchedAt, 
+  validateAge, 
+  validateName);
+
+talker.post('/', writeNewUser);
+
+talker.put('/:id', editUser);
 
 module.exports = talker;
