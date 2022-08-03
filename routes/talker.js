@@ -7,6 +7,8 @@ const validateWatchedAt = require('../middlewares/validateWatchedAt');
 const validateToken = require('../middlewares/validateToken');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
+const editUser = require('../helper/editUser');
+const deleteUsers = require('../helper/deleteUsers');
 
 const talker = express.Router();
 
@@ -41,5 +43,16 @@ validateWatchedAt,
 validateAge, 
 validateName,
 writeNewUser);
+
+talker.put('/:id', 
+validateToken,
+validateTalk,
+validateRate,
+validateWatchedAt,
+validateAge,
+validateName,
+editUser);
+
+talker.delete('/:id', validateToken, deleteUsers);
 
 module.exports = talker;
