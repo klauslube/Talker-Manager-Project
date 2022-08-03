@@ -1,5 +1,12 @@
 const express = require('express');
 const { readFile } = require('../helper/readFile');
+const { writeNewUser } = require('../helper/writeNewUser');
+const validateTalk = require('../middlewares/validateTalk');
+const validateRate = require('../middlewares/validateRate');
+const validateWatchedAt = require('../middlewares/validateWatchedAt');
+const validateToken = require('../middlewares/validateToken');
+const validateName = require('../middlewares/validateName');
+const validateAge = require('../middlewares/validateAge');
 
 const talker = express.Router();
 
@@ -25,5 +32,14 @@ talker.get('/:id', async (req, res) => {
    console.log(err);
   }
 });
+
+talker.post('/',
+validateToken,
+validateTalk, 
+validateRate,
+validateWatchedAt, 
+validateAge, 
+validateName,
+writeNewUser);
 
 module.exports = talker;
